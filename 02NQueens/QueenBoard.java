@@ -53,8 +53,13 @@ public class QueenBoard{
     public String toString(){
         String result = "";
         for (int r = 0; r < board.length; r++){
-            for (int c = 0; c < board[r].length; c++){
-                result += board[r][c] + "  ";
+            for (int c = 0; c < board.length; c++){
+                if(board[r][c] == -1){
+                    result += "Q" + " ";
+                }
+                else{
+                    result += "_" + " ";
+                }
             }
         result += '\n';
         }
@@ -69,3 +74,4 @@ public static void main(String[]args){
     System.out.println(q);
 }
 }
+
