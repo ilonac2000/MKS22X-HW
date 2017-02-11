@@ -6,6 +6,31 @@ public class QueenBoard{
 	board = new int[size][size];
     }
 
+   public void solve(){
+        solveH(0);
+    }
+
+    public boolean solveH(int c){
+        if (c >= board.length){
+            return true;
+        }
+        for (int i = 0; i < board.length; i++){
+            if (isValid(i, c)){
+                addQueen(i, c);
+                if(solveH(c + 1)){
+                    return true;
+                }
+                else{
+                    removeQueen(i, c);
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean isValid(int r, int c){
+       return (board[r][c] == 0);
+    }
     private void addQueen(int r, int c){
         for(int i = 0; i < board.length; i++){
             board[r][i] += 1;
@@ -13,7 +38,7 @@ public class QueenBoard{
         for(int i = 0; i < board.length; i++){
             board[i][c] += 1;
         } 
-        for (int i = 0; i < board.length - c; i++){
+        for (int i = 0; i + 1 < board.length - c; i++){
             board[r + i][c + i] += 1;
         }
         for (int i = 0; c - i > -1; i++){
@@ -68,10 +93,13 @@ public class QueenBoard{
 
 public static void main(String[]args){
     QueenBoard q = new QueenBoard(4);
-    q.addQueen(1,1);
-    System.out.println(q);
-    q.removeQueen(1,1);
+   // q.addQueen(1,1);
+    //q.addQueen(1,1);
+    //System.out.println(q.isValid(1,2));
+    q.solve();
     System.out.println(q);
 }
 }
+
+    //private void removeQueen(int r, int c)
 
