@@ -1,16 +1,19 @@
 public class QueenBoard{
     private int[][]board;
-    private int solutionCount;
+    private static int solutionCount;
     
     public QueenBoard(int size){
 	board = new int[size][size];
     }
 
-   public void solve(){
+    //find the 1st solution it can and stop, 
+    //this updates the board to be displayed in toString()
+    public void solve(){
         solveH(0);
     }
 
-    public boolean solveH(int c){
+    //Helper function for the solve() function
+    private boolean solveH(int c){
         if (c >= board.length){
             return true;
         }
@@ -28,6 +31,29 @@ public class QueenBoard{
         return false;
     }
 
+    private void clearBoard(){
+        for(int r  = 0; r < board.length; r++){
+            for (int c = 0; c < board.length; c++){
+                board[r][c] = 0; 
+            }
+        }
+    }
+
+    //look for all solutions,
+    //update the instance variable solutionCount to reflect the number found
+    public void countSolutions(){
+       for (int i = board.length ; i > -1 ; i--){
+           if (solveH(i)){
+                solutionCount += 1;
+            }
+       }
+    }
+
+    //return the number of solutions, 
+    //or -1 if the solver was never run.
+    public static int getCount(){
+        return solutionCount;
+    }
     public boolean isValid(int r, int c){
        return (board[r][c] == 0);
     }
@@ -94,9 +120,7 @@ public static void main(String[]args){
     QueenBoard q = new QueenBoard(4);
    // q.addQueen(1,1);
    // System.out.println(q.isValid(1,2));
-    q.solve();
-    System.out.println(q);
+    q.countSolutions();
+    System.out.println(getCount());
 }
 }
-
-    //private void removeQueen(int r, int c)
