@@ -1,6 +1,6 @@
 public class QueenBoard{
     private int[][]board;
-    private static int solutionCount;
+    private int solutionCount;
     
     public QueenBoard(int size){
     board = new int[size][size];
@@ -51,21 +51,24 @@ public class QueenBoard{
     //update the instance variable solutionCount to reflect the number found
     public void countSolutions(){
         countH(0);
-      }
+    }
  
     //return the number of solutions, 
     //or -1 if the solver was never run.
-    public static int getCount(){
-        return solutionCount;
-    }
-
-    private void clearBoard(){
-        for(int r  = 0; r < board.length; r++){
-            for (int c = 0; c < board.length; c++){
-                board[r][c] = 0; 
+    public int getSolutionCount(){
+        if ((solutionCount == 0)){
+            if ((board.length == 3) || (board.length == 2)){
+                return 0;
             }
+            return -1;
+        }
+        else{
+            return solutionCount;
         }
     }
+    
+
+
     public boolean isValid(int r, int c){
        return (board[r][c] == 0);
     }
@@ -129,11 +132,23 @@ public class QueenBoard{
     }
 
 /*public static void main(String[]args){
-    QueenBoard q = new QueenBoard(10);
+    QueenBoard q = new QueenBoard(1);
     // q.addQueen(1,1);
-    // q.solve();
-      // System.out.println(q);
-    q.countSolutions();
-    System.out.println(getCount());
+    q.solve();
+      System.out.println(q);
+   // q.countSolutions();
+    //System.out.println(q.getSolutionCount());
+        QueenBoard r = new QueenBoard(2);
+    // q.addQueen(1,1);
+    r.solve();
+       System.out.println(r);
+    //r.countSolutions();
+    //System.out.println(r.getSolutionCount());
+        QueenBoard s = new QueenBoard(4);
+    // q.addQueen(1,1);
+   s.solve();
+       System.out.println(s);
+//   s.countSolutions();
+   // System.out.println(s.getSolutionCount());
 }*/
 }
