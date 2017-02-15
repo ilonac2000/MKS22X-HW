@@ -8,7 +8,6 @@ public class KnightBoard{
     l = startingRows;
     h = startingCols;
     }
-
     public boolean solveh(int r, int c, int level){
 	if (level == l * h){
 	    return true;
