@@ -1,41 +1,43 @@
-public class KnightBoard{
+ppublic class KnightBoard{
     private int[][]board;
+    private int[]x = {2, 2, 1, 1, -1, -1, -2, -2};
+    private int[]y = {1, -1, 2, -2, 2, -2, 1, -1};
     private int l;
     private int h; 
 
     public KnightBoard(int startingRows,int startingCols){
     board = new int[startingRows][startingCols];
     l = startingRows;
-    h = startingCols;
-    }
+    h = startingCols; 
+	}
+
     public boolean solveh(int r, int c, int level){
-	if (level == l * h){
+	System.out.println(r);	
+	System.out.println(c);
+	System.out.println(level);		
+	if (level >= l * h){
 	    return true;
 	}
 	if (isValid(r, c)){
-	    board[r][c] = level;
-	    if ((solveh(r + 1, c + 2, level + 1)) || 
-		(solveh(r + 2, c + 1, level + 1)) ||
-		(solveh(r - 1, c - 2, level + 1)) ||
-		(solveh(r - 2, c - 1, level + 1)) ||
-		(solveh(r + 1, c - 2, level + 1)) ||
-		(solveh(r - 1, c + 2, level + 1)) ||
-		(solveh(r + 2, c - 1, level + 1)) ||
-		(solveh(r - 2, c + 1, level + 1))){
+	    for (int i = 0; i < 8; i++){
+		if(solveh(r + x[i],c + y[i], level + 1)){
+		board[r][c] = level;
 		return true;
-	    }
-	    board[r][c] = 0;
+		}
+	}
 	}
 	return false;
     }
     
-    public boolean isValid(int a, int b){
-	return (board[a][b] == 0);
+    public boolean isValid(int r, int c){
+	return ((r < l) && (r > 0) &&
+		(c < h) && (c > 0) &&
+		(board[r][c] == 0));
     }
 
     public void solve(){
-	if (!(solveh(0 , 1, 0 ))){
-	    solveh(0, 2, 0);
+	if (!(solveh(0 , 1, 1))){
+	    solveh(0, 2, 1);
 	}
     }
 
@@ -60,4 +62,3 @@ public class KnightBoard{
     System.out.println(q);
 }
 }
-
