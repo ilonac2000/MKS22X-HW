@@ -18,7 +18,7 @@ public class KnightBoard{
    // System.out.println(r);  
    // System.out.println(c);
    // System.out.println(level);      
-        if (level == l * h){
+        if (level ==  l * h){
             return true;
         }
         for (int i = 0; i < 8; i++){
@@ -55,6 +55,7 @@ public class KnightBoard{
         String result = "";
         for (int r = 0; r < l; r++){
             for (int c = 0; c < h; c++){
+		board[r][c] += 1;
                 if(board[r][c] < 10){
                     result += " " + board[r][c] + " ";
                 }
@@ -66,13 +67,13 @@ public class KnightBoard{
         }
         return result;
     }
-    public static void main(String[]args){
-     KnightBoard q = new KnightBoard(6, 7);
-    q.solve();
-    System.out.println(q);
+    /*public static void main(String[]args){
+     KnightBoard q = new KnightBoard(5, 6);
+    //q.solve();
+    //System.out.println(q);
     KnightBoard r = new KnightBoard(5, 5);
     r.solve();
     System.out.println(r);
 
-}
+    }*/
 }
