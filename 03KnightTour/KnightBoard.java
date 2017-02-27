@@ -1,3 +1,4 @@
+
 public class KnightBoard{
     private int[][]board;
     private int[]x = {2, 2, 1, 1, -1, -1, -2, -2};
@@ -52,8 +53,8 @@ public class KnightBoard{
         return "Larger number for rows, smaller number for columns";
         }
         String result = "";
-        for (int r = 0; r < board.length; r++){
-            for (int c = 0; c < board.length; c++){
+        for (int r = 0; r < l; r++){
+            for (int c = 0; c < h; c++){
                 if(board[r][c] < 10){
                     result += " " + board[r][c] + " ";
                 }
@@ -65,9 +66,13 @@ public class KnightBoard{
         }
         return result;
     }
-    /*public static void main(String[]args){
-    KnightBoard q = new KnightBoard(7, 7);
+    public static void main(String[]args){
+     KnightBoard q = new KnightBoard(6, 7);
     q.solve();
     System.out.println(q);
-}*/
+    KnightBoard r = new KnightBoard(5, 5);
+    r.solve();
+    System.out.println(r);
+
+}
 }
