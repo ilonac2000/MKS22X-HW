@@ -1,4 +1,3 @@
-
 public class KnightBoard{
     private int[][]board;
     private int[]x = {2, 2, 1, 1, -1, -1, -2, -2};
@@ -47,15 +46,28 @@ public class KnightBoard{
     solveh(0 , 0, 1);
     }
 
+    public boolean check(){
+        for (int r = 0; r < l; r++){
+            for (int c = 0; c < h; c++){
+                if (board[r][c] != 0){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 //create the board in the specifics
     public String toString(){
         if (h < l){
-        return "Larger number for rows, smaller number for columns";
+        return "Larger number for columns, smaller number for rows";
         }
+        boolean checked = check();
         String result = "";
         for (int r = 0; r < l; r++){
             for (int c = 0; c < h; c++){
-		board[r][c] += 1;
+                if (checked){
+                board[r][c] += 1;
+                }
                 if(board[r][c] < 10){
                     result += " " + board[r][c] + " ";
                 }
@@ -66,14 +78,5 @@ public class KnightBoard{
         result += '\n';
         }
         return result;
-    }
-    /*public static void main(String[]args){
-     KnightBoard q = new KnightBoard(5, 6);
-    //q.solve();
-    //System.out.println(q);
-    KnightBoard r = new KnightBoard(5, 5);
-    r.solve();
-    System.out.println(r);
-
-    }*/
+}
 }
