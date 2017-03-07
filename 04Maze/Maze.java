@@ -9,6 +9,7 @@ public class Maze{
     private int startc;
     private boolean s;
     private boolean end;
+    private String l;
 
 
     /*Constructor loads a maze text file, and sets animate to false by default.
@@ -33,12 +34,12 @@ public class Maze{
           //System.out.println("scanned");
           int lines = 0;
           while(sc1.hasNextLine()){
-              sc1.nextLine();
+              l = sc1.nextLine();
               lines += 1;
             }
           //System.out.println(total);
           //System.out.println(lines);
-          maze = new char[lines][lines];
+          maze = new char[lines][l.length()];
           Scanner sc = new Scanner(new File(filename));
           while(sc.hasNextLine()){
             for (int i = 0; i < lines; i++){
@@ -46,7 +47,7 @@ public class Maze{
             //System.out.println(line);
             //System.out.println(sc.next());
           
-            for(int j = 0; j < lines; j++){
+            for(int j = 0; j < l.length(); j++){
               
              //for(int k = 0; k < line.length(); k++){
             //char c = sc.next().charAt(k);
@@ -103,7 +104,7 @@ public class Maze{
     */
     public boolean solve(){
             //Initialize starting row and startint col with the location of the S. 
-            maze[startr][startc] = '@';//erase the S, and start solving!
+            maze[startr][startc] = ' ';//erase the S, and start solving!
             return solve(startr,startc);
     }
 
@@ -122,36 +123,40 @@ public class Maze{
             System.out.println("\033[2J\033[1;1H"+this);
             wait(20);
         }
-        if (isValid(row, col) && maze[row][col] == 'E'){
+       //if (isValid(row, col)){
+        if (maze[row][col] == 'E'){
             return true;
         }
-        if (isValid(row, col)){
+       if (isValid(row, col)){
           maze[row][col] = '@';
-          if(solve(row + 1, col)){
+           if(solve(row - 1, col) || 
+             (solve(row, col + 1)) ||
+             (solve(row, col - 1)) ||
+             solve(row + 1, col)){
               return true;
-          }
-          if(solve(row, col + 1)){
-              return true;
-          }
-        }
-          else{
-            maze[row][col] = '.';
-            //return false;
-            }
+          }    
+          maze[row][col] = '.';
+          //return false;
+         }
+        // }
         //COMPLETE SOLVE
         return false; //so it compiles
     }
 
     private boolean isValid(int row, int col){
       return ((row < maze.length) &&
-              (col < maze.length) &&
-              (maze[row][col] != '#'));
+              (row >= 0) &&
+              (col >= 0) &&
+              (col < maze[0].length) &&
+              (maze[row][col] == ' ') 
+             //&& (maze[row][col] != '.')
+              );
     }
 
     public String toString(){
       String result = "";
       for (int r = 0; r < maze.length; r++){
-        for (int c = 0; c < maze.length; c++){
+        for (int c = 0; c < maze[0].length; c++){
           result += maze[r][c];
         }
         result += '\n';
@@ -159,15 +164,15 @@ public class Maze{
       return result;
     }
 
-    public static void main(String[]args){
+    /*public static void main(String[]args){
         Maze f;
-        f = new Maze("data1.dat");//true animates the maze.
+        f = new Maze("data3.dat");//true animates the maze.
         
         //f.setAnimate(false);
         System.out.println(f);
         f.solve();
 
        System.out.println(f);
-    }
+    }*/
 
 }
