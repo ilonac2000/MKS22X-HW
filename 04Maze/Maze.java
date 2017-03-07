@@ -9,7 +9,7 @@ public class Maze{
     private int startc;
     private boolean s;
     private boolean end;
-    private String total;
+
 
     /*Constructor loads a maze text file, and sets animate to false by default.
       1. The file contains a rectangular ascii maze, made with the following 4 characters:
@@ -29,21 +29,30 @@ public class Maze{
 
     private void load(String filename){
       try {
-          Scanner sc = new Scanner(new File(filename));
+          Scanner sc1 = new Scanner(new File(filename));
           //System.out.println("scanned");
           int lines = 0;
-          while(sc.hasNextLine()){
-              total += sc.nextLine();
+          while(sc1.hasNextLine()){
+              sc1.nextLine();
               lines += 1;
             }
           //System.out.println(total);
           //System.out.println(lines);
           maze = new char[lines][lines];
-          for (int i = 0; i < lines; i++){
+          Scanner sc = new Scanner(new File(filename));
+          while(sc.hasNextLine()){
+            for (int i = 0; i < lines; i++){
+            String line = sc.nextLine();
+            //System.out.println(line);
+            //System.out.println(sc.next());
+          
             for(int j = 0; j < lines; j++){
-              char c = total.charAt(0);
-              //System.out.println(c);
-              total = total.substring(1);
+              
+             //for(int k = 0; k < line.length(); k++){
+            //char c = sc.next().charAt(k);
+                char c = line.charAt(j);
+             // System.out.print(c);
+             // total = total.substring(1);
               maze[i][j] = c;
               if(c == 'S'){
                 startr = i;
@@ -55,9 +64,11 @@ public class Maze{
               if(c == 'E'){
                 end = true;
               }
+              //}
             }
           }
         }
+      }
         catch (FileNotFoundException e){
           System.out.println("File Does Not Exist");
           System.exit(0);
@@ -66,6 +77,7 @@ public class Maze{
           System.out.println("File Does Not Contain a Start/End");
           System.exit(0);
         }
+        //System.out.println(maze.toString());
     }
   
     private void wait(int millis){ //ADDED SORRY!
@@ -91,7 +103,7 @@ public class Maze{
     */
     public boolean solve(){
             //Initialize starting row and startint col with the location of the S. 
-            maze[startr][startc] = ' ';//erase the S, and start solving!
+            maze[startr][startc] = '@';//erase the S, and start solving!
             return solve(startr,startc);
     }
 
@@ -121,10 +133,11 @@ public class Maze{
           if(solve(row, col + 1)){
               return true;
           }
+        }
           else{
             maze[row][col] = '.';
-              }
-          }
+            //return false;
+            }
         //COMPLETE SOLVE
         return false; //so it compiles
     }
@@ -141,6 +154,7 @@ public class Maze{
         for (int c = 0; c < maze.length; c++){
           result += maze[r][c];
         }
+        result += '\n';
       }
       return result;
     }
@@ -150,6 +164,7 @@ public class Maze{
         f = new Maze("data1.dat");//true animates the maze.
         
         //f.setAnimate(false);
+        System.out.println(f);
         f.solve();
 
        System.out.println(f);
