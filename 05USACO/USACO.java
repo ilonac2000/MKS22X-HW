@@ -1,18 +1,19 @@
-import java.util.*;
+	import java.util.*;
 	import java.io.*;
 
 	public class USACO{
-		//private static int[][]pasture;
-		//private static int R;
-		//private static int C;
-		//private static int E;
-		//private static int N;
+		private static int[][]pasture;
+		private static int R;
+		private static int C;
+		private static int E;
+		private static int N;
+		private static int D;
+		private static int ans;
 	    public  USACO(){
 	    }
 	    public int bronze(String filename){
-	    int[][] pasture;
-		int R,C,E,N;
-		try{
+	    	ans = 0;
+			try{
 		    Scanner scan = new Scanner(new File(filename));
 		    R = scan.nextInt();
 		    C = scan.nextInt();
@@ -24,46 +25,54 @@ import java.util.*;
 			    pasture[i][j] = scan.nextInt();
 			}
 		    }
-		    int row,col,dec;
-		    while (scan.hasNextLine()){
-			row = scan.nextInt();
-			col = scan.nextInt();
-			dec = scan.nextInt();
+		    for (int i = 0; i < N; i ++){
+		    	int a = scan.nextInt() - 1;
+		    	int b = scan.nextInt() - 1;
+		    	D = scan.nextInt();
+		    	stomp(a, b, D);
+		    }
+			}
+			catch (FileNotFoundException e){
+			System.out.println("File Not Found");
+			System.exit(1);
+			}
+			for (int i = 0; i < R; i++){
+				for (int j = 0 ; j < C; j++){
+					if (pasture[i][j] < E){
+					ans += (E - pasture[i][j]);
+			   		}
+				}
+			}
+			return ans * 72 * 72;
+		}
+
+		public static void stomp(int r, int c, int down){
 			int max = 0; 
-			for (int i = row; i < row + 3 && i < R; row++){
-			    for (int j = col; j < col + 3 && j < C; j++){
+			for (int i = r; i < r + 3 && i < R; i++){
+			    for (int j = c; j < c + 3 && j < C; j++){
 					if (pasture[i][j] > max){
 				    max = pasture[i][j];
 					}
 			    }
 			}
-			for (int i = row; i < row + 3 && i < R; i++){
-			    for (int j = col; j < col + 3 && j < C; j++){
-					if (pasture[i][j] > max - dec){
-				    pasture[i][j] = max - dec;
+			for (int i = 0; i < 3; i++){
+				for(int j = 0; j < 3; j++){
+					if(isValid(r + i, c +j) && 
+					   pasture[r + i][c + j] > max - D){
+						pasture[r + i][c + j] = down - max;
 					}
-			    }
-			}
-		    }
-		    int ans = 0;
-			//System.out.print(ans);
-		    for (int i = 0 ; i < pasture.length; i++){
-				for (int j = 0 ; j < pasture[0].length; j++){
-			    	if (pasture[i][j] < E){
-					ans += (E - pasture[i][j]);
-			   		}
 				}
 			}
-			result =  ans * 72 * 72;
 		}
-		catch (FileNotFoundException e){
-			System.out.println("File Not Found");
-			System.exit(0);
+		public static boolean isValid(int row, int col){
+			return ((row >= 0) &&
+					(row <= R) &&
+					(col >= 0) &&
+					(col <= C));
 		}
-		return result;
-	}
 		public static void main(String[]args){
 		    USACO x = new USACO();
 		    System.out.println(x.bronze("lake.txt"));
+		    System.out.println(x.bronze("lake2.txt"));
 		}
 	}
