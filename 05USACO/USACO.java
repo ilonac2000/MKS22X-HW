@@ -26,10 +26,10 @@
 			}
 		    }
 		    for (int i = 0; i < N; i ++){
-		    	int a = scan.nextInt() - 1;
-		    	int b = scan.nextInt() - 1;
+		    	int a = scan.nextInt();
+		    	int b = scan.nextInt();
 		    	D = scan.nextInt();
-		    	stomp(a, b, D);
+		    	stomp(a - 1, b - 1, D);
 		    }
 			}
 			catch (FileNotFoundException e){
@@ -39,27 +39,29 @@
 			for (int i = 0; i < R; i++){
 				for (int j = 0 ; j < C; j++){
 					if (pasture[i][j] < E){
-					ans += (E - pasture[i][j]);
+					//pasture[i][j] = Math.abs(pasture[i][j]);
+					ans += E - pasture[i][j];
 			   		}
 				}
 			}
-			return ans * 72 * 72;
+			ans = ans * 72 * 72;
+			return ans;
 		}
 
 		public static void stomp(int r, int c, int down){
 			int max = 0; 
-			for (int i = r; i < r + 3 && i < R; i++){
-			    for (int j = c; j < c + 3 && j < C; j++){
-					if (pasture[i][j] > max){
-				    max = pasture[i][j];
+			for (int i = 0; i < 3; i++){
+			    for (int j = 0; j < 3; j++){
+					if (isValid(r + i, c + j) && pasture[r + i][c + j] > max){
+				    max = pasture[r + i][c + j];
 					}
 			    }
 			}
 			for (int i = 0; i < 3; i++){
 				for(int j = 0; j < 3; j++){
 					if(isValid(r + i, c +j) && 
-					   pasture[r + i][c + j] > max - D){
-						pasture[r + i][c + j] = down - max;
+					   max - pasture[r + i][c + j] <= D){
+						pasture[r + i][c + j] = pasture[r + i][c + j] - (down - (max - pasture[r + i][c + j]));
 					}
 				}
 			}
@@ -70,9 +72,9 @@
 					(col >= 0) &&
 					(col <= C));
 		}
-		public static void main(String[]args){
+		/*public static void main(String[]args){
 		    USACO x = new USACO();
-		    System.out.println(x.bronze("lake.txt"));
-		    System.out.println(x.bronze("lake2.txt"));
-		}
+		    //System.out.println(x.bronze("makelake2.in"));
+		    System.out.println(x.bronze("lake1.txt"));
+		}*/
 	}
