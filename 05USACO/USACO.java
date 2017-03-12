@@ -2,11 +2,11 @@ import java.util.*;
 	import java.io.*;
 
 	public class USACO{
-		private static int[][]pasture;
-		private static int R;
-		private static int C;
-		private static int E;
-		private static int N;
+		//private static int[][]pasture;
+		//private static int R;
+		//private static int C;
+		//private static int E;
+		//private static int N;
 	    public  USACO(){
 	    }
 	    public int bronze(String filename){
