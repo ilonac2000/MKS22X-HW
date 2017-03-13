@@ -30,7 +30,7 @@
 		board = new int[R1][C1];
 		for(int i = 0; i < R1; i++){
 		String l = scan.next();
-		for (int j = 0; j < C; j++){
+		for (int j = 0; j < C1; j++){
 			if (l.charAt(j) == '*'){
 				map[i][j] = -1;
 				board[i][j] = -1;
@@ -139,9 +139,9 @@
 					(col >= 0) &&
 					(col <= C));
 		}
-		/*public static void main(String[]args){
-		    USACO x = new USACO();
+		//public static void main(String[]args){
+		//    USACO x = new USACO();
 		    //System.out.println(x.bronze("lake1.txt"));
-		    System.out.println(x.silver("ctravel.txt"));
-		}*/
+		//    System.out.println(x.silver("ctravel.txt"));
+		//}
 	}
