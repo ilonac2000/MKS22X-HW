@@ -26,7 +26,7 @@ public static int part(int [] data, int start, int end){
 	return end;
 }
 
-/*public static int quickselect(int []data, int k){
+public static int quickselect(int []data, int k){
 	int result = -1;
 	int start = 0;
 	int end = data.length - 1;
@@ -40,9 +40,17 @@ public static int part(int [] data, int start, int end){
 		}
 	}
 	return data[k];
-}*/
+}
 
-public static void main(String[]args){
+
+public static void quick(int []data, int start, int end){
+	if (start < end){
+		p = part(data, start, end);
+		quick(data, p, end);
+		quick(data, start, p);
+	}
+}
+/*public static void main(String[]args){
   Random r = new Random();
   int[]ary = { 0, -1, -5, -3, -4, -2};
   int[]ary2 = { 0, 0, -5, 0, -4, 0};
@@ -63,5 +71,5 @@ System.out.println(part(ary2 , 0, ary2.length - 1));
 //System.out.println(quickselect( ary , 3 )); //  would return 10
 //System.out.println(quickselect( ary , 4 )); //  would return 15
 //System.out.println(quickselect( ary , 5 )); //  would return 23
-}
+//}
 }
