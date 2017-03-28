@@ -11,13 +11,13 @@ public class Merge{
 
 public static void mergesort(int[]ary){
 	if (ary.length > 1){
-		size = ary.length / 2
+		int size = ary.length / 2;
 		int[]left = new int[size];
 		int[]right = new int[ary.length - size];
 		for (int i = 0; i < size; i++){
 			left[i] = ary[i];
 		}
-		for (int j = size; j < ary.length, j++){
+		for (int j = size; j < ary.length; j++){
 			right[j - size] = ary[j];
 		}
 		mergesort(left);
@@ -46,14 +46,12 @@ public static void merge(int[]a,int[]b,int[]destination){
    	if (i < a.length){
    		destination[dest] = a[i];
    		dest++;
-   		i++
+   		i++;
    	}
    	if (j < b.length){
    		destination[dest] = b[j];
    		dest++;
    		j++;
    	}
-   }
-    }
-
+}
 }
