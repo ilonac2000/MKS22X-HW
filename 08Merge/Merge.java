@@ -26,10 +26,34 @@ public static void mergesort(int[]ary){
 	}
 }
 
+public static void merge(int[]a,int[]b,int[]destination){
+   int dest = 0;
+   int i = 0;
+   int j = 0;
+   while (i < a.length && j < b.length){
+   		if (a[i] <= b[j]){
+   			destination[dest] = a[i];
+   			dest++;
+   			i++;
 
-
-void merge(int[]a,int[]b,int[]destination){
-   merge(left, right, inputArray);
+   		}
+   		else{
+   			destination[dest] = b[j];
+   			dest++;
+   			j++;
+   		}
+   	}
+   	if (i < a.length){
+   		destination[dest] = a[i];
+   		dest++;
+   		i++
+   	}
+   	if (j < b.length){
+   		destination[dest] = b[j];
+   		dest++;
+   		j++;
+   	}
+   }
     }
 
 }
