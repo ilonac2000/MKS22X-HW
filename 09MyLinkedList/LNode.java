@@ -3,6 +3,9 @@ public class LNode{
 	LNode pre;
 	LNode next;
 
+	public LNode(){
+		
+	}
 	public LNode(int n){
 		value = n;
 	}
