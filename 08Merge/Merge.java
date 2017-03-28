@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Merge{
 /*  if ...base case...
    stop!
@@ -54,12 +56,26 @@ public static void merge(int[]a,int[]b,int[]destination){
    		j++;
    	}
 }
-public static void main(String[]args){
+/*public static void main(String[]args){
+	Random r = new Random();
 	int[]ary = { 0, 1, 5, 3, 4, 2};
   	int[]ary2 = { 0, 0, -5, 0, -4, 0};
-  	mergesort(ary2);
-  	for (int i : ary2) {
+  	int[] integers = new int[6];
+  	int[] integers2 = new int[6];
+   	for (int i = 0; i < integers.length; i++) {
+    	integers[i] = r.nextInt();
+    }
+    for (int i = 0; i < integers.length; i++){
+    	integers2[i] = integers[i];
+    }
+  	mergesort(integers);
+  	Arrays.sort(integers2);
+  	for (int i : integers) {
+     System.out.print(i + ", ");
+   	}   	
+   	System.out.println("!!!!!!!!!!!!!!!!!");
+   	for (int i : integers2) {
      System.out.print(i + ", ");
    	} 
-}
+}*/
 }
