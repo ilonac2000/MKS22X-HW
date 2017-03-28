@@ -54,4 +54,12 @@ public static void merge(int[]a,int[]b,int[]destination){
    		j++;
    	}
 }
+public static void main(String[]args){
+	int[]ary = { 0, 1, 5, 3, 4, 2};
+  	int[]ary2 = { 0, 0, -5, 0, -4, 0};
+  	mergesort(ary2);
+  	for (int i : ary2) {
+     System.out.print(i + ", ");
+   	} 
+}
 }
