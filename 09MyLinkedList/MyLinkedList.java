@@ -42,8 +42,7 @@ public class MyLinkedList{
 				LNode nexto = new LNode(num, null, current);
 				start = nexto;
 			}
-			else{
-				if(i == size){
+			else{if(i == size){
 					add(num);
 					size -= 1;
 				}
