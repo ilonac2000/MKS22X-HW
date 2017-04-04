@@ -5,8 +5,8 @@ public class MyLinkedList{
 		private LNode next;
 		public LNode(int n){
 			value = n;
-			next = null;
-			pre = null;
+			//next = null;
+			//pre = null;
 		}
 		public LNode(int n, LNode nes, LNode last){
 			value = n;
@@ -22,6 +22,57 @@ public class MyLinkedList{
 		end = null;
 		size = 0;	
 	}	
+	public int getSize(){
+		return size;
+	}
+	private LNode getNthNode(int n){
+		int mid = getSize() / 2;
+		LNode current = start; 
+		if (n < mid){
+			for(int i = 0; i < mid; i++){
+				current = current.next;	
+				if(i == n){
+					return current;
+				}
+			}
+		}
+		else{
+			for(int i = size; i > 0; i--){
+				current = current.prev;
+				if (i == n){
+					return current;
+				}
+			}
+		}	
+	}
+   	private void addAfter(LNode tba, LNode loc){
+		if(loc.next==null){
+	    		tba.next=null;
+	   	 	loc.next=tba.prev;
+	   		tba.prev=loc.next;
+			end = tba;
+		}
+		else{
+		    tba.next = loc.next.prev;
+		    tba.prev = loc.next;
+		    loc.next.prev = tba.next;
+		    loc.next = tba.prev;
+		}
+		size++;
+    	}
+	private void remove(LNode x){
+		if (x.next == null){
+			x.prev.next = null;
+			end = x.prev;
+		}
+		if (x.prev == null){
+			x.next.prev = null;
+			start = x.next;
+		}
+		else{
+			x.prev.next = x.next;
+			x.next.prev = x.prev;
+	}
 	public boolean add(int num){		
 		LNode current = start;
 		while (current != end){
@@ -31,6 +82,7 @@ public class MyLinkedList{
 		size++;
 		return true;
 	}
+
 	public void add(int i, int num){
 		if ((i > size) || (i < 0)){
 			throw new IndexOutofBoundsException("Index of add out of bounds");
@@ -63,9 +115,7 @@ public class MyLinkedList{
 		}
 		size++;
 	}
-	public int getSize(){
-		return size;
-	}
+
     public int set(int i, int new){
 		if ((i > size) || (i < 0)){
 			throw new IndexOutofBoundsException("Index of set out of bounds");
@@ -85,19 +135,7 @@ public class MyLinkedList{
 		}
 		return hold;
 	}
-    private void insertAfter(LNode tba, LNode loc){
-		if(loc.next==null){
-	    	tba.next=null;
-	    	loc.next=tba;
-	   		tba.prev=loc;
-		}
-		else{
-		    tba.next=loc.next;
-		    loc.next=tba;
-		    tba.prev=loc;
-		}
-		size++;
-    }
+
     private void insertBefore(LNode tba, LNode loc){
 		if(loc.prev==null){
 	    	tba.prev=null;
@@ -121,4 +159,5 @@ public class MyLinkedList{
 		return result + "]";
 	}
 }
+
     
