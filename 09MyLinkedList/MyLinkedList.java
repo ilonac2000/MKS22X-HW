@@ -1,7 +1,8 @@
+import java.util.*;
 public class MyLinkedList{
 	private class LNode{
 		private int value;
-		private LNode pre;
+		private LNode prev;
 		private LNode next;
 		public LNode(int n){
 			value = n;
@@ -11,7 +12,7 @@ public class MyLinkedList{
 		public LNode(int n, LNode nes, LNode last){
 			value = n;
 			next = nes;
-			pre = last;
+			prev = last;
 		}
 	}
 	LNode start;
@@ -72,6 +73,7 @@ public class MyLinkedList{
 		else{
 			x.prev.next = x.next;
 			x.next.prev = x.prev;
+		}
 	}
 	public boolean add(int num){		
 		LNode current = start;
@@ -100,12 +102,14 @@ public class MyLinkedList{
 				}
 				else{
 					while (x < size){
-						if (x + 1 == i){
 							LNode nexto = new LNode(num, current.prev, current.next);
-							current.nexto = nexto
+						if (x + 1 == i){
+
+							nexto.next = nexto;
 							x = size + 2;
 						}
 						else{
+							
 							nexto = nexto.next;
 						}
 						i++;
@@ -115,18 +119,17 @@ public class MyLinkedList{
 		}
 		size++;
 	}
-
-    public int set(int i, int new){
+    public int set(int i, int news){
+		int hold = 0;
 		if ((i > size) || (i < 0)){
 			throw new IndexOutofBoundsException("Index of set out of bounds");
 		}
 		else{
-			int hold = 0;
 			LNode current = start;
 			for (int j = 0; j < size; j++){
-				if (i = j){
+				if (i == j){
 				hold = current.value;
-				current.value = new;
+				current.value = news;
 				}
 				else{
 					current = current.next;
