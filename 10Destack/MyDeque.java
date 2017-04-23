@@ -54,12 +54,27 @@ public class MyDeque{
 	}
 	public String removeFirst(){
 		String result = " ";
-
+		if (size == 0){
+			throw new NoSuchElementException("deque is empty");
+		}
+		result = deque[start];
+		start += 1;
+		size -= 1;
+		if (start >= deque.length){
+			start = 0;
+		}
 		return result;
 	}
 	public String removeLast(){
 		String result = " ";
-
+		if (size == 0){
+			throw new NoSuchElementException("deque is empty");
+		}
+		result = deque[end];
+		if (end - 1 < 0){
+			end = deque.length - 1;
+		}
+		size -= 1;
 		return result;
 	}
 	public String getFirst(){
