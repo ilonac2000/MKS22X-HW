@@ -1,7 +1,5 @@
-
 import java.util.*;
-//public class MyLinkedList implements Iterable<Integer>{
-public class MyLinkedList{
+public class MyLinkedList implements Iterable<Integer>{
 
   private class LNode{
     LNode next,prev;
@@ -188,5 +186,33 @@ public class MyLinkedList{
       }
     }
     size++;
+  }
+
+  public class LLIterator implements Iterator<Integer>{
+    private MyLinkedList list;
+    private LNode current;
+    public LLIterator(MyLinkedList l, LNode x){
+      list = l;
+      current = x;
+    }
+    public boolean hasNext(){
+      if (list.start == null && current == null){
+        return false;
+      }
+      else{
+        return true;
+      }
+    }
+    public Integer next(){
+      Integer result = new Integer(current.value);
+      current = current.next;
+      return result;
+    }
+    public void remove(){
+      throw new UnsupportedOperationException("new remove");
+    }
+  }
+  public LLIterator iterator(){
+    return new LLIterator(this, null);
   }
 }
