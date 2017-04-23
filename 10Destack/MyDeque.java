@@ -50,7 +50,7 @@ public class MyDeque{
 			end = 0;
 		}
 		size += 1;
-		deque[end] = x;
+		deque[end + 1] = x;
 	}
 	public String removeFirst(){
 		String result = " ";
@@ -78,13 +78,17 @@ public class MyDeque{
 		return result;
 	}
 	public String getFirst(){
-		String result = " ";
-
+		if (size == 0){
+			throw new NoSuchElementException("deque is empty");
+		}
+		String result = deque[start];
 		return result;
 	}
 	public String getLast(){
-		String result = " ";
-
+			if (size == 0){
+			throw new NoSuchElementException("deque is empty");
+		}
+		String result = deque[end];
 		return result;
 	}
 }
