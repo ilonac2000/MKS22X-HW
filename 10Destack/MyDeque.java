@@ -7,7 +7,7 @@ public class MyDeque{
 
 	
 	public MyDeque(){
-		deque = new String[];
+		deque = new String[1];
 		start = 0;
 		end = -1;
 	}
@@ -28,16 +28,29 @@ public class MyDeque{
 	}
 	public void addFirst(String x){
 		if (x == null){
-			throw new NullPointerException("specified element is null");
+			throw new NullPointerException("can not add null element");
 		}
-		if (end == deque.length - 1){
+		if (size + 1 >= deque.length){
 			makeBigger();
 		}
-
+		if (start - 1 < 0){
+			start = deque.length - 1;
 		}
+		deque[start - 1] = x;
+		size += 1;
 	}
 	public void addLast(String x){
-
+		if (x == null){
+			throw new NullPointerException("can not add null element");
+		}
+		if (size + 1 >= deque.length){
+			makeBigger();
+		}
+		if (end + 1 >= deque.length){
+			end = 0;
+		}
+		size += 1;
+		deque[end] = x;
 	}
 	public String removeFirst(){
 		String result = " ";
@@ -60,4 +73,3 @@ public class MyDeque{
 		return result;
 	}
 }
-
