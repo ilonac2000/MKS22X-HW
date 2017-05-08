@@ -45,17 +45,17 @@ public class MyHeap{
 	}
 	private void pushUp(int index){
 		while ((heaps.get(index).compareTo(heaps.get(index / 2)) * constant) < 0){
-			switch(index, index / 2);	
+			switches(index, index / 2);	
 			index = index / 2;
 		}
 	}	
 	private void pushDown(int index){
 		while ((heaps.get(index).compareTo(heaps.get(index / 2)) * constant) > 0){
-			switch(index, index / 2);	
+			switches(index, index / 2);	
 			index = index / 2;
 		}
 	}
-	private void switch(int i, int j){
+	private void switches(int i, int j){
 		String hold = heaps.get(j);
 		heaps.set(j, heaps.get(i));
 		heaps.set(i, hold);
