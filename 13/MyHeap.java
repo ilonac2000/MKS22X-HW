@@ -28,7 +28,7 @@ public class MyHeap{
 	public String remove(){	
 		String result = heaps.get(1);
 		heaps.set(1, size);
-		heaps.size += 1;
+		size += 1;
 		pushDown(size - 1);
 		return result;
 	}
