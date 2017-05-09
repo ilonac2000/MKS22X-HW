@@ -33,11 +33,11 @@ public class MyHeap{
 		return result;
 	}
 	public String peek(){
-		if ((heap.size() - 1) < 1){
+		if ((size - 1) < 1){
 	    throw new NoSuchElementException("No such element in peek method");
 		}
-		else if ((heap.size() - 1) == 1){
-	    	return "Nothing there";
+		else if ((size - 1) == 1){
+	    	return "There is nothing there, add first please";
 	    }
 	    else{
 		return heaps.get(1);
