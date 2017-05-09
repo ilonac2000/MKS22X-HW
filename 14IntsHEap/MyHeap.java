@@ -2,10 +2,10 @@ import java.util.*;
 
 public class MyHeap{
 	private int constant;
-	private ArrayList<String> heaps;	
+	private ArrayList<Integer> heaps;	
 
 	public MyHeap(){
-		heaps = new ArrayList<String>();
+		heaps = new ArrayList<Integer>();
 		constant = 1;
 	}
 	public MyHeap(boolean c){
@@ -15,27 +15,24 @@ public class MyHeap{
 		else{
 			constant = -1;
 		}
-		heaps = new ArrayList<String>();
+		heaps = new ArrayList<Integer>();
 			 
 	}
-	public void add(String s){
+	public void add(Integer s){
 		heaps.add(s);
 		pushUp(heaps.size() - 1);
 	}
-	public String remove(){	
-		String result = heaps.get(1);
+	public Integer remove(){	
+		Integer result = heaps.get(1);
 		heaps.set(1, heaps.get(heaps.size() - 1));
 		heaps.remove(heaps.size() - 1);
 		pushDown(1);
 		return result;
 	}
-	public String peek(){
+	public Integer peek(){
 		if (heaps.size() == 0){
 	    throw new NoSuchElementException("No such element in peek method");
 		}
-		else if ((heaps.size() - 1) == 1){
-	    	return "There is nothing there, add first please";
-	    }
 	    else{
 		return heaps.get(1);
 		}
@@ -55,7 +52,7 @@ public class MyHeap{
 		}
 	}
 	private void switches(int i, int j){
-		String hold = heaps.get(j);
+		Integer hold = heaps.get(j);
 		heaps.set(j, heaps.get(i));
 		heaps.set(i, hold);
 	}
