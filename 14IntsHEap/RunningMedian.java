@@ -11,19 +11,44 @@ public class RunningMedian{
     }
 
     public double getMedian(){		
-        double result = 0.0
-        if ((min.getSize() == 0) && (max.getSize() == 0)){
+        double result = 0.0;
+        int sizeM = min.getSize();
+        int sizeN = max.getSize();
+        if ((sizeM == 0) && (sizeN == 0)){
             throw new NoSuchElementException("Size of heaps are zero");
         }
         else{
             int minT = min.peek();
             int maxT = max.peek();
-            int result = (mintT + maxT) / 2;
+         if(sizeM == sizeN){
+            result = (minT + maxT) / 2;
+         }
+         else if(sizeM > sizeN){
+            result = minT;
+         }
+         else{
+            result = maxT;
+         }
         }
         return result;
-
-    public void add(Integer i){
-	   
     }
 
+    public void add(Integer i){
+	   if (i < getMedian()){
+        min.add(i);
+       }
+       else{
+        max.add(i);
+       }
+       int result = min.getSize() - max.getSize;
+       if(result > 1 || result < -1){
+        if (result < -1){
+            min.add(max.remove());
+        }
+        else{
+            max.add(min.remove());
+        }
+       }
+    }
 }
+
