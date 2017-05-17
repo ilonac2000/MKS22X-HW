@@ -1,8 +1,18 @@
 import java.lang.*;
 
 public class FrontierPriorityQueue implements Frontier{
-	public void add(Location loc){
-		
+	private size;v
+	private LinkedList<String> front;
+	
+	public Location next(){
+		return remove(1);
 	}
-	public Location next();
+
+	public boolean isEmpty(Location loc){
+	
+	}
+		
+	private Location remove(int index){
+	
+	}
 }
