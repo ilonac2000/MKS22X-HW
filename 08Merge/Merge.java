@@ -37,7 +37,7 @@ public static void msh(int[] ary, int a, int b, int x, int y){
       a++;
     }
     else{
-      ddest[hold] = ary[x];
+      dest[hold] = ary[x];
       x++;
     }
     hold++;
@@ -47,7 +47,7 @@ public static void msh(int[] ary, int a, int b, int x, int y){
       dest[hold] = ary[n];
       hold++;
     }
-  ]
+  }
   else{
     for (int m = a; m < b + 1; m++){
       dest[hold] = ary[m];
@@ -60,8 +60,7 @@ public static void msh(int[] ary, int a, int b, int x, int y){
   }
   for (int n = j; n < y + 1; n++){
     ary[n] = dest[let];
-    let++
+    let++;
   }
 }
 }
-
