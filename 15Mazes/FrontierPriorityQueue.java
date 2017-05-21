@@ -1,18 +1,19 @@
 import java.lang.*;
+import java.util.*;
 
 public class FrontierPriorityQueue implements Frontier{
-	private size;v
-	private LinkedList<String> front;
+	private PriorityQueue<Location> front = new PriorityQueue<Location>();
 	
 	public Location next(){
-		return remove(1);
+		Location result = front.peek();
+		front.remove(result);
+		return result; 
+	}
+	public boolean isEmpty(){
+		return (front.size() == 0);
+	}
+	public void add(Location loc){
+		front.add(loc);
 	}
 
-	public boolean isEmpty(Location loc){
-	
-	}
-		
-	private Location remove(int index){
-	
-	}
 }
