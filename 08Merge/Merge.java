@@ -12,70 +12,56 @@ public class Merge{
 */
 
 public static void mergesort(int[]ary){
-	if (ary.length > 1){
-		int size = ary.length / 2;
-		int[]left = new int[size];
-		int[]right = new int[ary.length - size];
-		for (int i = 0; i < size; i++){
-			left[i] = ary[i];
-		}
-		for (int j = size; j < ary.length; j++){
-			right[j - size] = ary[j];
-		}
-		mergesort(left);
-		mergesort(right);
-		merge(left, right, ary);	
-	}
+    merge(ary, 0, ary.length - 1); 
 }
 
-public static void merge(int[]a,int[]b,int[]destination){
-   int dest = 0;
-   int i = 0;
-   int j = 0;
-   while (i < a.length && j < b.length){
-   		if (a[i] <= b[j]){
-   			destination[dest] = a[i];
-   			dest++;
-   			i++;
+public static void merge(int[] ary, int a, int b){
+  if (b > a){
+      int mid = (a + b) / 2;
+      int i = ((a + b) / 2) + 1;
+      merge(ary, a, mid);
+      merge(ary, i, b);
+      msh(ary, a, mid, i, b);
+  }
+}
+public static void msh(int[] ary, int a, int b, int x, int y){
+  int size = (y - a) + 1;
+  int hold = 0;
+  int let = 0;
+  int i = a;
+  int j = x; 
+  int[] dest = new int[size];
+  while (a <= b && x <= y){
+    if (ary[a] <= ary[b]){ 
+      dest[hold] = ary[a];
+      a++;
+    }
+    else{
+      ddest[hold] = ary[x];
+      x++;
+    }
+    hold++;
+  }
+  if (a > b){
+    for(int n = b; n < y + 1; n++){
+      dest[hold] = ary[n];
+      hold++;
+    }
+  ]
+  else{
+    for (int m = a; m < b + 1; m++){
+      dest[hold] = ary[m];
+      hold++;
+    }
+  }
+  for (int m = i; m < b + 1; m++){
+    ary[m] = dest[let];
+    let++;
+  }
+  for (int n = j; n < y + 1; n++){
+    ary[n] = dest[let];
+    let++
+  }
+}
+}
 
-   		}
-   		else{
-   			destination[dest] = b[j];
-   			dest++;
-   			j++;
-   		}
-   	}
-   	if (i < a.length){
-   		destination[dest] = a[i];
-   		dest++;
-   		i++;
-   	}
-   	if (j < b.length){
-   		destination[dest] = b[j];
-   		dest++;
-   		j++;
-   	}
-}
-/*public static void main(String[]args){
-	Random r = new Random();
-	int[]ary = { 0, 1, 5, 3, 4, 2};
-  	int[]ary2 = { 0, 0, -5, 0, -4, 0};
-  	int[] integers = new int[6];
-  	int[] integers2 = new int[6];
-   	for (int i = 0; i < integers.length; i++) {
-    	integers[i] = r.nextInt();
-    }
-    for (int i = 0; i < integers.length; i++){
-    	integers2[i] = integers[i];
-    }
-  	mergesort(integers);
-  	Arrays.sort(integers2);
-  	for (int i : integers) {
-     System.out.print(i + ", ");
-   	}   	
-   	System.out.println("!!!!!!!!!!!!!!!!!");
-   	for (int i : integers2) {
-     System.out.print(i + ", ");
-   	} 
-}*/
-}
