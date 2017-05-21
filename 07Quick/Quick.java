@@ -7,13 +7,14 @@ import java.util.*;
 public class Quick{
 
 public static int[] part(int [] data, int start, int end){
-	int pivot = (int)(Math.random() * (end - start + 1) + start);
+	int pivot = ((int)(start + (Math.random() * (end - start + 1))));
+	int need = data[pivot];
 	//System.out.println(pivot);
 	int[] hold = new int[data.length];
 	int lt = start;
 	int gt = end;
 	for (int i = start; i <= end; i++){
-		if (data[i] < data[pivot]){
+		if (data[i] < need){
 			hold[lt] = data[i];
 			lt++;
 		}
@@ -23,7 +24,7 @@ public static int[] part(int [] data, int start, int end){
 		}
 	}
 	for(int j = lt; j <= gt; j++){
-		hold[j] = hold[pivot];
+		hold[j] = need;
 	}
 	for (int k = start; k <= end; k++){
 		data[k] = hold[k];
@@ -50,7 +51,7 @@ public static int quicksh(int []a, int k, int start, int end){
 	else{
 		return quicksh(a, k, result[1] + 1, end);
 	}
-}	
+}
 
 
 public static void quicksort(int[] a){
@@ -58,8 +59,8 @@ public static void quicksort(int[] a){
 }
 
 public static void qsh(int[] data, int start, int end){
-	int[] p = part(data, start, end);
 	if (start < end){
+		int[] p = part(data, start, end);
 		qsh(data, start, p[0]);
 		qsh(data, p[1], end);
 		}
