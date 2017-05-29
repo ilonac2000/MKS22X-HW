@@ -58,27 +58,40 @@ public class MazeSolver{
 		board.set(now.getRow(), now.getCol(), 'S');
 	int r = now.getRow();
 	int c = now.getCol();
-	if (isValid(r + 1, c)){
+	try {
+		if (isValid(r + 1, c)){
 		front.add(new Location(r + 1, c, now, dist(r + 1, c, board.getStart()),
 										  dist(r + 1, c, board.getEnd()), aS));
 		board.set(r + 1, c, '?');
+		}
 	}
-	if (isValid(r - 1, c)){
+	catch (IndexOutOfBoundsException e){}	
+	try{
+		if (isValid(r - 1, c)){
 		front.add(new Location(r - 1, c, now, dist(r - 1, c, board.getStart()),
 										  dist(r - 1, c, board.getEnd()), aS));
 		board.set(r - 1, c, '?');
+		}
 	}
-	if (isValid(r, c + 1)){
+	catch (IndexOutOfBoundsException e){}	
+	try{
+		if (isValid(r, c + 1)){
 		front.add(new Location(r, c + 1, now, dist(r, c + 1, board.getStart()),
 										  dist(r, c + 1, board.getEnd()), aS));
 		board.set(r, c + 1, '?');
+		}
 	}
-	if (isValid(r, c - 1)){
+	catch (IndexOutOfBoundsException e){}	
+	try {
+		if (isValid(r, c - 1)){
 		front.add(new Location(r, c - 1, now, dist(r, c - 1, board.getStart()),
 										  dist(r, c  - 1, board.getEnd()), aS));
 		board.set(r, c - 1, '?');
 	}
-	}	
+	}
+	catch (IndexOutOfBoundsException e){}	
+	board.set(now.getRow(), now.getCol(), '.');
+		}
 	}
 
 	public boolean isValid(int r, int c){
