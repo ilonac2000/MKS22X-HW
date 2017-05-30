@@ -1,5 +1,7 @@
 import java.util.*;
 public class MyLinkedList implements Iterable<Integer>{
+  LNode start,end;
+  int size;
 
   private class LNode{
     LNode next,prev;
@@ -12,9 +14,6 @@ public class MyLinkedList implements Iterable<Integer>{
     }
   }
 
-  LNode start,end;
-  int size;
-
   public MyLinkedList(){
       start = null;
       end = null;
@@ -25,26 +24,18 @@ public class MyLinkedList implements Iterable<Integer>{
   }
 
     
-  private LNode getNthNode(int n){
+  private LNode getNthNode(int n){   
+      int i = 0;
       LNode current = start; 
       if(n < 0 || n >= size()){
         throw new IndexOutOfBoundsException("get Index out of range");
       }
-      else{
-      int mid = size / 2;
-      if (n < mid){
-       for(int i = 0; i < mid; i++){
-         current = current.next; 
-        }
-      }
-      else{
-      for(int i = size; i > 0; i--){
-        current = current.prev;
-      }
-      }
+      while (i < n){
+        current = current.next;
+        i++;
       }
       return current;
-    }
+  }
 
   private void addAfter(LNode loc, LNode tba){
       if(loc.next==null){
@@ -84,21 +75,18 @@ public class MyLinkedList implements Iterable<Integer>{
 
   public String toString(){     
     String result = "[";
-    if (size > 0){
-      result += " ";
-      LNode current = start;
-      result += current.value;
-      current = current.next;
-      for (int i = 0; i < size; i++){
-        result += ", " + current.value;
-        current = current.next;
+    for (int i = 0; i < size; i++){
+      if (i > 0){
+        result += ", ";
       }
+      result += get(i);
+      i++;
     }
-     return result + "]";
+    return result + "]";
   }
 
   public boolean add(int num){ 
-    if (start == null){
+    if (size == 0){
       start = new LNode(num);
       end = start;
     }
@@ -117,7 +105,7 @@ public class MyLinkedList implements Iterable<Integer>{
 
   public int set(int i, int news){
     LNode current = getNthNode(i);
-    int olds = current.value;
+    int olds = get(i);
     current.value = news;
     return olds;
   }
@@ -133,57 +121,31 @@ public class MyLinkedList implements Iterable<Integer>{
 
   public int remove(int index){  
     LNode x = getNthNode(index);
-    if (x.next == null){
-      x.prev.next = null;
-      end = x.prev;
-    }
-    if (x.prev == null){
-      x.next.prev = null;
-      start = x.next;
-    }
-    else{
+    int result = x.value;
+    if (index >= 0 && index < size - 1){
       x.prev.next = x.next;
       x.next.prev = x.prev;
     }
-    return x.value;
+    else if(index == 0){
+      start = x.next;
+    }
+    else{
+      end.prev.next = null;
+    }
+    size--;
+    return result;
   }
 
   public void add(int i,int num){
-    if ((i > size) || (i < 0)){
-      throw new IndexOutOfBoundsException("Add index out of range");
-    }
-    else if(size == 0 || i == size()){
+    if (size == 0 || i == size){
       add(num);
     }
-    else{
-      int x = 0;
-      LNode current = start;
-      if (i == 0){
-        LNode nexto = new LNode(num);
-        nexto.next = start;
-        start = nexto;
-      }
-      else{if(i == size){
-          add(num);
-          size -= 1;
-        }
-        else{
-          while (x < size){
-              LNode nexto = new LNode(num);
-              nexto.next = current.next;
-              nexto.prev = current.prev;
-            if (x + 1 == i){
-              nexto.next = nexto;
-              x = size + 2;
-            }
-            else{
-              
-              nexto = nexto.next;
-            }
-            i++;
-          }
-        }
-      }
+    LNode now = getNthNode(i);
+    LNode hold = new LNode(num);
+    hold.next = now;
+    if (i > 0){
+      hold.prev = now.prev;
+      hold.prev.next = now;
     }
     size++;
   }
@@ -204,12 +166,19 @@ public class MyLinkedList implements Iterable<Integer>{
       }
     }
     public Integer next(){
+      if (hasNext()){
       Integer result = new Integer(current.value);
-      current = current.next;
+      if (current.next != null){
+        current = current.next;
+      }
       return result;
+      }
+      else{
+        throw new NoSuchElementException("no next element");
+      }
     }
     public void remove(){
-      throw new UnsupportedOperationException("new remove");
+      throw new UnsupportedOperationException("no remove");
     }
   }
   public LLIterator iterator(){
