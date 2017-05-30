@@ -1,6 +1,5 @@
 import java.lang.*;
 import java.util.*;
-
 public class MazeSolver{
 	private Maze board;
 	private boolean animated;
