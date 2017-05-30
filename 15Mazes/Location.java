@@ -26,6 +26,9 @@ public class Location implements Comparable<Location>{
 		 	return DTG - other.DTG;
 		}
 	}
+	public Location getPrev(){
+		return prev;
+	}
 	public int getRow(){
 		return row;
 	}
