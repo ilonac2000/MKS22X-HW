@@ -33,10 +33,7 @@ public class MyHeap{
 		if (heaps.size() == 0){
 	    throw new NoSuchElementException("No such element in peek method");
 		}
-		else if ((heaps.size() - 1) == 1){
-	    	return "There is nothing there, add first please";
-	    }
-	    else{
+		else if(heaps.size() > 2){
 		return heaps.get(1);
 		}
 	}
