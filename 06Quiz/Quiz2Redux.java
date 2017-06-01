@@ -8,6 +8,7 @@ public class Quiz2Redux{
   public static ArrayList<String> combinations(String s){
       ArrayList<String>words = new ArrayList<String>();
       help( words , " ", s);
+      words.add(" ");
       Collections.sort(words);
       return words;
   }
@@ -20,8 +21,10 @@ public class Quiz2Redux{
     }
   }
 
- // public static void main(String[]args){
-  //  System.out.println(combinations("abcd"));
-  //  System.out.println(combinations(""));
-  //}
+  /*public static void main(String[]args){
+   System.out.println(combinations("abcd"));
+   System.out.println(combinations(""));
+  System.out.println(combinations("ijk"));
+
+ }*/
 }
