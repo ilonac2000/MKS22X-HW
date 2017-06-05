@@ -10,24 +10,18 @@ public static int[] part(int [] data, int start, int end){
 	int pivot = ((int)(start + (Math.random() * (end - start + 1))));
 	int need = data[pivot];
 	//System.out.println(pivot);
-	int[] hold = new int[data.length];
 	int lt = start;
 	int gt = end;
-	for (int i = start; i <= end; i++){
-		if (data[i] < need){
-			hold[lt] = data[i];
+	for (int i = lt; i < gt; i++){
+		while(data[lt] < need){
 			lt++;
 		}
-		else if(data[i] > data[pivot]){
-			hold[gt] = data[i];
+		while(data[gt] > need){	
 			gt--;
 		}
-	}
-	for(int j = lt; j <= gt; j++){
-		hold[j] = need;
-	}
-	for (int k = start; k <= end; k++){
-		data[k] = hold[k];
+		int x = data[lt];
+		data[lt] = data[gt];
+		data[gt] = x;
 	}
 	int[] result = new int[2];
 	result[0] = lt - 1;
@@ -65,5 +59,13 @@ public static void qsh(int[] data, int start, int end){
 		qsh(data, p[1], end);
 		}
 	}
-
+/*public static void main(String[]args){
+	int[]ans =new int[10000000];
+	for(int i = 0; i < 10000000; i++){
+        ans[i]= 4;
+      }
+     System.out.println("created");
+     quicksort(ans);
+      System.out.println("done");
+}*/
 }
