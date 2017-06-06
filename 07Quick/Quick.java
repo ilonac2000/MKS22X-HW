@@ -1,3 +1,4 @@
+
 import java.util.*;
 
 /*
@@ -12,16 +13,26 @@ public static int[] part(int [] data, int start, int end){
 	//System.out.println(pivot);
 	int lt = start;
 	int gt = end;
-	for (int i = lt; i < gt; i++){
-		while(data[lt] < need){
+	int y = data[lt];
+	data[lt] = data[pivot];
+	data[pivot] = y;
+	for (int i = start; i <= gt;){
+		if(data[i] < need){
+			int x = data[lt];
+			data[lt] = data[i];
+			data[i] = x;
+			i++;
 			lt++;
 		}
-		while(data[gt] > need){	
+		else if(data[i] == need){	
+			i++;
+		}
+		else if(data[i] > need){
+			int z = data[gt];
+			data[gt] = data[i];
+			data[i] = z;	
 			gt--;
 		}
-		int x = data[lt];
-		data[lt] = data[gt];
-		data[gt] = x;
 	}
 	int[] result = new int[2];
 	result[0] = lt - 1;
