@@ -9,18 +9,14 @@ public class MyDeque{
 	public MyDeque(){
 		deque = new String[1];
 		start = 0;
-		end = -1;
+		end = 0;
+		size = 0;
 	}
 	private void makeBigger(){
 		String[] news = new String[deque.length * 2];
 		for (int i = 0; i < size; i++){
-			int current  = i + start;
-			if(current < deque.length){
-				news[i] = deque[current];
-			}
-			else{
-				news[i] = deque[current - deque.length];
-			}
+			int current  = (i + start) %  deque.length;
+			news[i] = deque[current];
 		}
 		deque = news;
 		start = 0;
@@ -30,27 +26,32 @@ public class MyDeque{
 		if (x == null){
 			throw new NullPointerException("can not add null element");
 		}
-		if (size + 1 >= deque.length){
+		else if (size + 1 >= deque.length){
 			makeBigger();
 		}
-		if (start - 1 < 0){
-			start = deque.length - 1;
+		else if (size > 0){
+			if (start == 0){
+				start = deque.length - 1;
+			}
+			else{
+				start = start - 1;
+			}
 		}
-		deque[start - 1] = x;
+		deque[start] = x;
 		size += 1;
 	}
 	public void addLast(String x){
 		if (x == null){
 			throw new NullPointerException("can not add null element");
 		}
-		if (size + 1 >= deque.length){
+		else if (size + 1 >= deque.length){
 			makeBigger();
 		}
-		if (end + 1 >= deque.length){
-			end = 0;
+		else if (size > 0){
+			end = (end + 1) % deque.length;
 		}
-		size += 1;
 		deque[end + 1] = x;
+		size += 1;
 	}
 	public String removeFirst(){
 		String result = " ";
@@ -58,11 +59,9 @@ public class MyDeque{
 			throw new NoSuchElementException("deque is empty");
 		}
 		result = deque[start];
-		start += 1;
+		deque[start] = null;
 		size -= 1;
-		if (start >= deque.length){
-			start = 0;
-		}
+		start = (start + 1) % deque.length;
 		return result;
 	}
 	public String removeLast(){
@@ -71,8 +70,12 @@ public class MyDeque{
 			throw new NoSuchElementException("deque is empty");
 		}
 		result = deque[end];
+		deque[end] = null;
 		if (end - 1 < 0){
 			end = deque.length - 1;
+		}
+		else{
+			end-= 1;
 		}
 		size -= 1;
 		return result;
